@@ -137,7 +137,7 @@ macro(PIXSFM_ADD_PYMODULE TARGET_NAME)
     # set_target_properties(${TARGET_NAME} PROPERTIES FOLDER
     #     ${PIXSFM_TARGETS_ROOT_FOLDER}/${FOLDER_NAME})
     target_link_libraries(${TARGET_NAME} PRIVATE pixsfm)
-    install(TARGETS ${TARGET_NAME} DESTINATION bin/)
+    install(TARGETS ${TARGET_NAME} DESTINATION $ENV{SP_DIR}/pixsfm)
 endmacro(PIXSFM_ADD_PYMODULE)
 
 # Wrapper for test executables.
