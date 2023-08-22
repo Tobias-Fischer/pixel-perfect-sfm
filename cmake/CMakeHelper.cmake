@@ -133,7 +133,8 @@ endmacro(PIXSFM_ADD_EXECUTABLE)
 
 macro(PIXSFM_ADD_PYMODULE TARGET_NAME)
     # ${ARGN} will store the list of source files passed to this function.
-    pybind11_add_module(${TARGET_NAME} ${ARGN})
+    Python_add_library(${TARGET_NAME} ${ARGN})
+    target_link_libraries(${TARGET_NAME} pybind11::headers)
     # set_target_properties(${TARGET_NAME} PROPERTIES FOLDER
     #     ${PIXSFM_TARGETS_ROOT_FOLDER}/${FOLDER_NAME})
     target_link_libraries(${TARGET_NAME} PRIVATE pixsfm)
