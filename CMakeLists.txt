@@ -27,8 +27,13 @@ endif()
 ################################################################################
 # Find packages
 ################################################################################
-# find_package(CUDA ${CUDA_MIN_VERSION} REQUIRED) #not-required
 find_package(Eigen3 3.3 REQUIRED)
+cmake_policy(SET CMP0057 NEW)
+cmake_policy(SET CMP0146 OLD)
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
+find_package(pybind11 REQUIRED)
+add_definitions(-DH5_USE_HALF_FLOAT)
+find_package(HighFive REQUIRED)
 find_package(COLMAP REQUIRED)
 
 ################################################################################
