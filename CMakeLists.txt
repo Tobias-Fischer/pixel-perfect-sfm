@@ -107,8 +107,6 @@ set(PIXSFM_EXTERNAL_LIBRARIES
 
 set(PIXSFM_INTERNAL_LIBRARIES
   HighFive
-  pybind11::module
-  pybind11::embed
 )
 
 include_directories(
@@ -119,7 +117,7 @@ include_directories(
 
 link_directories(${PIXSFM_LINK_DIRS})
 
-set(PYBIND11_INSTALL ON)
+set(PYBIND11_INSTALL OFF)
 add_subdirectory(third-party)
 add_subdirectory(pixsfm)
 
