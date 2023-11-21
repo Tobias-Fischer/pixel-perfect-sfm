@@ -58,7 +58,7 @@ class CMakeBuild(build_ext):
         extdir = \
             os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
         cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
-                      '-DPYTHON_EXECUTABLE=' + sys.executable,
+                      '-DPython_EXECUTABLE=' + sys.executable,
                       '-DTESTS_ENABLED=OFF']
 
         avx2_enabled = os.environ.get("AVX2_ENABLED")
