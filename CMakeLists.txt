@@ -4,6 +4,8 @@ cmake_minimum_required( VERSION 3.0 )
 # project name
 project(PIXSFM)
 
+find_package(CUDAToolkit REQUIRED COMPONENTS cudart)
+
 ################################################################################
 # Include CMake dependencies
 ################################################################################
