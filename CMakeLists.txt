@@ -28,7 +28,7 @@ endif()
 # Find packages
 ################################################################################
 # find_package(CUDA ${CUDA_MIN_VERSION} REQUIRED) #not-required
-find_package(Eigen3 3.3 REQUIRED)
+find_package(Eigen3 REQUIRED)
 find_package(COLMAP REQUIRED)
 
 ################################################################################
