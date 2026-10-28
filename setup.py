@@ -1,5 +1,6 @@
 import os
 import re
+import shlex
 import sys
 import platform
 import subprocess
@@ -59,7 +60,10 @@ class CMakeBuild(build_ext):
             os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
         cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
                       '-DPYTHON_EXECUTABLE=' + sys.executable,
+                      '-DPython_EXECUTABLE=' + sys.executable,
                       '-DTESTS_ENABLED=OFF']
+        # Extra CMake arguments, e.g. from a package build environment.
+        cmake_args += shlex.split(os.environ.get('CMAKE_ARGS', ''))
 
         avx2_enabled = os.environ.get("AVX2_ENABLED")
         if avx2_enabled is not None:
@@ -83,7 +87,9 @@ class CMakeBuild(build_ext):
             build_args += ['--', '/m']
         else:
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
-            build_args += ['--', '-j']
+            # CMake itself honors CMAKE_BUILD_PARALLEL_LEVEL if set.
+            if 'CMAKE_BUILD_PARALLEL_LEVEL' not in os.environ:
+                build_args += ['--', '-j']
 
         env = os.environ.copy()
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(
