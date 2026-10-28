@@ -123,7 +123,7 @@ setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     packages=find_packages(include=["pixsfm", "pixsfm.*"]),
-    python_requires='>=3.6',
+    python_requires='>=3.10',
     ext_modules=[CMakeExtension('pixsfm._pixsfm')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
