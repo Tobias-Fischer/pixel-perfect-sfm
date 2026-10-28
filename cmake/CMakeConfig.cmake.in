@@ -108,7 +108,6 @@ set(PIXSFM_LINK_DIRS
 set(PIXSFM_INTERNAL_LIBRARIES
     HighFive
     pybind11::module
-    pybind11::embed
 )
 
 set(PIXSFM_EXTERNAL_LIBRARIES
