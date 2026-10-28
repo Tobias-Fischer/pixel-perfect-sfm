@@ -8,7 +8,6 @@ from pathlib import Path
 
 from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
-from distutils.version import LooseVersion
 
 
 class CMakeExtension(Extension):
@@ -47,9 +46,9 @@ class CMakeBuild(build_ext):
                 ", ".join(e.name for e in self.extensions))
 
         if platform.system() == "Windows":
-            cmake_version = LooseVersion(re.search(r'version\s*([\d.]+)',
-                                                   out.decode()).group(1))
-            if cmake_version < '3.1.0':
+            cmake_version = tuple(int(v) for v in re.search(
+                r'version\s*(\d+)\.(\d+)', out.decode()).groups())
+            if cmake_version < (3, 1):
                 raise RuntimeError("CMake >= 3.1.0 is required on Windows")
 
         for ext in self.extensions:
