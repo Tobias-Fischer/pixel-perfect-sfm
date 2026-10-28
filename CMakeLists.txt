@@ -31,6 +31,12 @@ endif()
 find_package(Eigen3 3.3 REQUIRED)
 find_package(COLMAP REQUIRED)
 
+# Use pybind11 and HighFive from the system if available, otherwise the
+# bundled submodules (see third-party/CMakeLists.txt).
+find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+find_package(pybind11 CONFIG QUIET)
+find_package(HighFive QUIET)
+
 ################################################################################
 # Select correct C/C++ standard
 ################################################################################
