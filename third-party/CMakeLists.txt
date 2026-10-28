@@ -12,6 +12,10 @@ if(NOT HighFive_FOUND)
   # Avoid building docs and examples
   set(HIGHFIVE_BUILD_DOCS OFF)
   set(HIGHFIVE_EXAMPLES OFF)
+  set(HIGHFIVE_UNIT_TESTS OFF)
+  # pixsfm does not use HighFive's Boost support, which requires the Boost
+  # system library (removed in Boost 1.89).
+  set(HIGHFIVE_USE_BOOST OFF)
 
   add_subdirectory(HighFive)
 endif()
