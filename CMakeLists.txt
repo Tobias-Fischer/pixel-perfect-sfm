@@ -30,6 +30,9 @@ endif()
 # find_package(CUDA ${CUDA_MIN_VERSION} REQUIRED) #not-required
 find_package(Eigen3 REQUIRED)
 find_package(COLMAP REQUIRED)
+# COLMAP's config enables AUTORCC when it finds Qt. pixsfm has no Qt resources,
+# and running the target's rcc fails when cross-compiling.
+set(CMAKE_AUTORCC OFF)
 
 # Use pybind11 and HighFive from the system if available, otherwise the
 # bundled submodules (see third-party/CMakeLists.txt).
@@ -95,19 +98,16 @@ set(PIXSFM_INCLUDE_DIRS
   ${HDF5_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
   ${PROJECT_SOURCE_DIR}
-  ${FREEIMAGE_INCLUDE_DIRS}
   ${CERES_INCLUDE_DIRS}
-  ${COLMAP_INCLUDE_DIRS}
 )
 
 set(PIXSFM_LINK_DIRS
-  ${COLMAP_LINK_DIRS}
 )
 
+# The imported COLMAP target also carries required compile definitions.
 set(PIXSFM_EXTERNAL_LIBRARIES
   ${CERES_LIBRARIES}
-  ${FREEIMAGE_LIBRARIES}
-  ${COLMAP_LIBRARIES}
+  colmap::colmap
   ${HDF5_C_LIBRARIES}
 )
 
