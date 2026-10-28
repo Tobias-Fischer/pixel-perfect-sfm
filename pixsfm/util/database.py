@@ -183,7 +183,8 @@ class COLMAPDatabase(sqlite3.Connection):
 
         keypoints = np.asarray(keypoints, np.float32)
         self.execute(
-            "INSERT INTO keypoints VALUES (?, ?, ?, ?)",
+            "INSERT INTO keypoints (image_id, rows, cols, data) "
+            "VALUES (?, ?, ?, ?)",
             (image_id,) + keypoints.shape + (array_to_blob(keypoints),))
 
     def add_descriptors(self, image_id, descriptors):
